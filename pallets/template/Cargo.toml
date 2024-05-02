@@ -1,6 +1,6 @@
 [package]
 name = "pallet-template"
-description = "FRAME pallet template for defining custom runtime logic. (polkadot v1.9.0)"
+description = "FRAME pallet template for defining custom runtime logic. (polkadot v1.11.0)"
 version = "0.1.0"
 license = "MIT-0"
 authors.workspace = true
@@ -19,19 +19,19 @@ targets = ["x86_64-unknown-linux-gnu"]
 codec = { package = "parity-scale-codec", version = "3.6.1", default-features = false, features = [
 	"derive",
 ] }
-scale-info = { version = "2.10.0", default-features = false, features = [
+scale-info = { version = "2.11.1", default-features = false, features = [
 	"derive",
 ] }
 
 # frame deps
-frame-benchmarking = { version = "31.0.0", default-features = false, optional = true }
-frame-support = { version = "31.0.0", default-features = false }
-frame-system = { version = "31.0.0", default-features = false }
+frame-benchmarking = { version = "33.0.0", default-features = false, optional = true }
+frame-support = { version = "33.0.0", default-features = false }
+frame-system = { version = "33.0.0", default-features = false }
 
 [dev-dependencies]
-sp-core = { version = "31.0.0" }
-sp-io = { version = "33.0.0" }
-sp-runtime = { version = "34.0.0" }
+sp-core = { path = "../../../../substrate/primitives/core" }
+sp-io = { version = "35.0.0" }
+sp-runtime = { version = "36.0.0" }
 
 [features]
 default = ["std"]

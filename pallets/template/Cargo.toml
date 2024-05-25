@@ -1,6 +1,6 @@
 [package]
 name = "pallet-template"
-description = "FRAME pallet template for defining custom runtime logic. (polkadot v1.11.0)"
+description = "FRAME pallet template for defining custom runtime logic. (polkadot v1.12.0)"
 version = "0.1.0"
 license = "MIT-0"
 authors.workspace = true
@@ -24,14 +24,14 @@ scale-info = { version = "2.11.1", default-features = false, features = [
 ] }
 
 # frame deps
-frame-benchmarking = { version = "33.0.0", default-features = false, optional = true }
-frame-support = { version = "33.0.0", default-features = false }
-frame-system = { version = "33.0.0", default-features = false }
+frame-benchmarking = { version = "34.0.0", default-features = false, optional = true }
+frame-support = { version = "34.0.0", default-features = false }
+frame-system = { version = "34.0.0", default-features = false }
 
 [dev-dependencies]
-sp-core = { version = "32.0.0" }
-sp-io = { version = "35.0.0" }
-sp-runtime = { version = "36.0.0" }
+sp-core = { version = "33.0.1" }
+sp-io = { version = "36.0.0" }
+sp-runtime = { version = "37.0.0" }
 
 [features]
 default = ["std"]

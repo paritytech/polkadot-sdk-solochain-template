@@ -1,6 +1,6 @@
 [package]
 name = "solochain-template-runtime"
-description = "A solochain runtime template built with Substrate, part of Polkadot Sdk. (polkadot v1.11.0)"
+description = "A solochain runtime template built with Substrate, part of Polkadot Sdk. (polkadot v1.12.0)"
 version = "0.1.0"
 license = "MIT-0"
 authors.workspace = true
@@ -25,42 +25,42 @@ scale-info = { version = "2.11.1", default-features = false, features = [
 ] }
 
 # frame
-frame-support = { version = "33.0.0", default-features = false, features = ["experimental"] }
-frame-system = { version = "33.0.0", default-features = false }
-frame-try-runtime = { version = "0.39.0", default-features = false, optional = true }
-frame-executive = { version = "33.0.0", default-features = false }
+frame-support = { version = "34.0.0", default-features = false, features = ["experimental"] }
+frame-system = { version = "34.0.0", default-features = false }
+frame-try-runtime = { version = "0.40.0", default-features = false, optional = true }
+frame-executive = { version = "34.0.0", default-features = false }
 
 # frame pallets
-pallet-aura = { version = "32.0.0", default-features = false }
-pallet-balances = { version = "34.0.0", default-features = false }
-pallet-grandpa = { version = "33.0.0", default-features = false }
-pallet-sudo = { version = "33.0.0", default-features = false }
-pallet-timestamp = { version = "32.0.0", default-features = false }
-pallet-transaction-payment = { version = "33.0.0", default-features = false }
+pallet-aura = { version = "33.0.0", default-features = false }
+pallet-balances = { version = "35.0.0", default-features = false }
+pallet-grandpa = { version = "34.0.0", default-features = false }
+pallet-sudo = { version = "34.0.0", default-features = false }
+pallet-timestamp = { version = "33.0.0", default-features = false }
+pallet-transaction-payment = { version = "34.0.0", default-features = false }
 
 # primitives
-sp-api = { version = "31.0.0", default-features = false }
-sp-block-builder = { version = "31.0.0", default-features = false }
-sp-consensus-aura = { version = "0.37.0", default-features = false, features = ["serde"] }
-sp-consensus-grandpa = { version = "18.0.0", default-features = false, features = ["serde"] }
-sp-core = { version = "32.0.0", default-features = false, features = ["serde"] }
-sp-inherents = { version = "31.0.0", default-features = false }
-sp-offchain = { version = "31.0.0", default-features = false }
-sp-runtime = { version = "36.0.0", default-features = false, features = ["serde"] }
-sp-session = { version = "32.0.0", default-features = false }
+sp-api = { version = "32.0.0", default-features = false }
+sp-block-builder = { version = "32.0.0", default-features = false }
+sp-consensus-aura = { version = "0.38.0", default-features = false, features = ["serde"] }
+sp-consensus-grandpa = { version = "19.0.0", default-features = false, features = ["serde"] }
+sp-core = { version = "33.0.1", default-features = false, features = ["serde"] }
+sp-inherents = { version = "32.0.0", default-features = false }
+sp-offchain = { version = "32.0.0", default-features = false }
+sp-runtime = { version = "37.0.0", default-features = false, features = ["serde"] }
+sp-session = { version = "33.0.0", default-features = false }
 sp-std = { version = "14.0.0", default-features = false }
 sp-storage = { version = "21.0.0", default-features = false }
-sp-transaction-pool = { version = "31.0.0", default-features = false }
-sp-version = { version = "34.0.0", default-features = false, features = ["serde"] }
-sp-genesis-builder = { version = "0.12.0", default-features = false }
+sp-transaction-pool = { version = "32.0.0", default-features = false }
+sp-version = { version = "35.0.0", default-features = false, features = ["serde"] }
+sp-genesis-builder = { version = "0.13.0", default-features = false }
 
 # RPC related
-frame-system-rpc-runtime-api = { version = "31.0.0", default-features = false }
-pallet-transaction-payment-rpc-runtime-api = { version = "33.0.0", default-features = false }
+frame-system-rpc-runtime-api = { version = "32.0.0", default-features = false }
+pallet-transaction-payment-rpc-runtime-api = { version = "34.0.0", default-features = false }
 
 # Used for runtime benchmarking
-frame-benchmarking = { version = "33.0.0", default-features = false, optional = true }
-frame-system-benchmarking = { version = "33.0.0", default-features = false, optional = true }
+frame-benchmarking = { version = "34.0.0", default-features = false, optional = true }
+frame-system-benchmarking = { version = "34.0.0", default-features = false, optional = true }
 
 # The pallet in this template.
 pallet-template = { path = "../pallets/template", default-features = false, version = "0.1.0" }

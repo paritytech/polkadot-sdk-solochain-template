@@ -11,6 +11,9 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v3
 
@@ -34,7 +37,20 @@ jobs:
           large-packages: false
           swap-storage: false
 
-      - name: Check if it compiles
-        id: check-compilation
-        run: cargo check && cargo test
+      - name: Build the template
+        run: cargo build
         timeout-minutes: 90
+
+      - name: Run clippy
+        run: |
+          SKIP_WASM_BUILD=1 cargo clippy --all-targets --locked --workspace --quiet
+          SKIP_WASM_BUILD=1 cargo clippy --all-targets --all-features --locked --workspace --quiet
+        timeout-minutes: 30
+
+      - name: Run the tests
+        run: cargo test
+        timeout-minutes: 15
+
+      - name: Build the docs
+        run: cargo doc --all-features --workspace --no-deps
+        timeout-minutes: 15

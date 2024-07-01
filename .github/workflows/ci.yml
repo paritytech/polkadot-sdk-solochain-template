@@ -55,7 +55,6 @@ jobs:
         run: cargo doc --all-features --workspace --no-deps
         timeout-minutes: 15
 
-
   build-docker:
     runs-on: ubuntu-latest
     steps:

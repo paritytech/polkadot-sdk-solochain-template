@@ -1,6 +1,6 @@
 [package]
 name = "solochain-template-node"
-description = "A solochain node template built with Substrate, part of Polkadot Sdk. (polkadot v1.13.0)"
+description = "A solochain node template built with Substrate, part of Polkadot Sdk. (polkadot v1.14.0)"
 version = "0.1.0"
 license = "Unlicense"
 authors.workspace = true
@@ -15,44 +15,44 @@ build = "build.rs"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-clap = { version = "4.5.3", features = ["derive"] }
-futures = { version = "0.3.30", features = ["thread-pool"] }
+clap = { features = ["derive"], workspace = true }
+futures = { features = ["thread-pool"], workspace = true }
 serde_json = { workspace = true, default-features = true }
-jsonrpsee = { version = "0.22", features = ["server"] }
-sc-cli = { version = "0.43.0" }
-sp-core = { version = "34.0.0" }
-sc-executor = { version = "0.39.0" }
-sc-network = { version = "0.41.0" }
-sc-service = { version = "0.42.0" }
-sc-telemetry = { version = "21.0.0" }
-sc-transaction-pool = { version = "35.0.0" }
-sc-transaction-pool-api = { version = "35.0.0" }
-sc-offchain = { version = "36.0.0" }
-sc-consensus-aura = { version = "0.41.0" }
-sp-consensus-aura = { version = "0.39.0" }
-sc-consensus = { version = "0.40.0" }
-sc-consensus-grandpa = { version = "0.26.0" }
-sp-consensus-grandpa = { version = "20.0.0" }
-sc-client-api = { version = "35.0.0" }
-sc-rpc-api = { version = "0.40.0" }
-sc-basic-authorship = { version = "0.41.0" }
-sp-runtime = { version = "38.0.0" }
-sp-io = { version = "37.0.0" }
-sp-timestamp = { version = "33.0.0" }
-sp-inherents = { version = "33.0.0" }
-sp-keyring = { version = "38.0.0" }
-sp-api = { version = "33.0.0" }
-sp-blockchain = { version = "35.0.0" }
-sp-block-builder = { version = "33.0.0" }
-frame-system = { version = "35.0.0" }
-pallet-transaction-payment = { version = "35.0.0", default-features = false }
-pallet-transaction-payment-rpc = { version = "37.0.0" }
-substrate-frame-rpc-system = { version = "35.0.0" }
-frame-benchmarking-cli = { version = "39.0.0" }
-solochain-template-runtime = { version = "0.1.0", path = "../runtime" }
+jsonrpsee = { features = ["server"], workspace = true }
+sc-cli = { version = "0.44.0", workspace = true, default-features = true }
+sp-core = { version = "34.0.0", workspace = true, default-features = true }
+sc-executor = { version = "0.39.0", workspace = true, default-features = true }
+sc-network = { version = "0.42.0", workspace = true, default-features = true }
+sc-service = { version = "0.43.0", workspace = true, default-features = true }
+sc-telemetry = { version = "22.0.0", workspace = true, default-features = true }
+sc-transaction-pool = { version = "35.0.0", workspace = true, default-features = true }
+sc-transaction-pool-api = { version = "35.0.0", workspace = true, default-features = true }
+sc-offchain = { version = "37.0.0", workspace = true, default-features = true }
+sc-consensus-aura = { version = "0.42.0", workspace = true, default-features = true }
+sp-consensus-aura = { version = "0.39.0", workspace = true, default-features = true }
+sc-consensus = { version = "0.41.0", workspace = true, default-features = true }
+sc-consensus-grandpa = { version = "0.27.0", workspace = true, default-features = true }
+sp-consensus-grandpa = { version = "20.0.0", workspace = true, default-features = true }
+sc-client-api = { version = "35.1.0", workspace = true, default-features = true }
+sc-rpc-api = { version = "0.41.0", workspace = true, default-features = true }
+sc-basic-authorship = { version = "0.42.0", workspace = true, default-features = true }
+sp-runtime = { version = "38.0.0", workspace = true, default-features = true }
+sp-io = { version = "37.0.0", workspace = true, default-features = true }
+sp-timestamp = { version = "33.0.0", workspace = true, default-features = true }
+sp-inherents = { version = "33.0.0", workspace = true, default-features = true }
+sp-keyring = { version = "38.0.0", workspace = true, default-features = true }
+sp-api = { version = "33.0.0", workspace = true, default-features = true }
+sp-blockchain = { version = "35.1.0", workspace = true, default-features = true }
+sp-block-builder = { version = "33.0.0", workspace = true, default-features = true }
+frame-system = { version = "36.0.0", workspace = true, default-features = true }
+pallet-transaction-payment = { version = "36.0.0", workspace = true }
+pallet-transaction-payment-rpc = { version = "38.0.0", workspace = true, default-features = true }
+substrate-frame-rpc-system = { version = "36.0.0", workspace = true, default-features = true }
+frame-benchmarking-cli = { version = "40.0.0", workspace = true, default-features = true }
+solochain-template-runtime = { version = "0.1.0", workspace = true }
 
 [build-dependencies]
-substrate-build-script-utils = { version = "11.0.0" }
+substrate-build-script-utils = { version = "11.0.0", workspace = true, default-features = true }
 
 [features]
 default = []

@@ -48,11 +48,11 @@ jobs:
         timeout-minutes: 30
 
       - name: Run the tests
-        run: cargo test
+        run: SKIP_WASM_BUILD=1 cargo test
         timeout-minutes: 15
 
       - name: Build the docs
-        run: cargo doc --all-features --workspace --no-deps
+        run: SKIP_WASM_BUILD=1 cargo doc --workspace --no-deps
         timeout-minutes: 15
 
   build-docker:

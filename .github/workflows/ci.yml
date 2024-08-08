@@ -54,6 +54,10 @@ jobs:
         run: cargo build
         timeout-minutes: 90
 
+      - name: Build the node individually in release mode
+        run: cargo --package solochain-template-node --release
+        timeout-minutes: 90
+
       - name: Run clippy
         run: |
           SKIP_WASM_BUILD=1 cargo clippy --all-targets --locked --workspace --quiet

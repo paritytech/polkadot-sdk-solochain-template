@@ -68,6 +68,14 @@ jobs:
         run: SKIP_WASM_BUILD=1 cargo doc --workspace --no-deps
         timeout-minutes: 15
 
+      # This is mentioned as example in the README:
+      - name: Build the node individually in release mode
+        run: |
+          # Save some space from debug builds
+          rm -rf ./target
+          cargo build --package solochain-template-node --release
+        timeout-minutes: 90
+
   build-docker:
     runs-on: ubuntu-latest
     steps:

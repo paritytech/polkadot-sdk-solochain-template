@@ -1,5 +1,8 @@
 name: PR Reminder
 
+permissions:
+  pull-requests: write
+
 on:
   pull_request:
     types:

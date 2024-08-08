@@ -55,7 +55,7 @@ jobs:
         timeout-minutes: 90
 
       - name: Build the node individually in release mode
-        run: cargo --package solochain-template-node --release
+        run: cargo build --package solochain-template-node --release
         timeout-minutes: 90
 
       - name: Run clippy

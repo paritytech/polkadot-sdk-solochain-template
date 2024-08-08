@@ -85,7 +85,10 @@ substrate-build-script-utils.workspace = true
 substrate-build-script-utils.default-features = true
 
 [features]
-default = []
+default = ["std"]
+std = [
+	"solochain-template-runtime/std",
+]
 # Dependencies that are only required if runtime benchmarking should be build.
 runtime-benchmarks = [
 	"frame-benchmarking-cli/runtime-benchmarks",

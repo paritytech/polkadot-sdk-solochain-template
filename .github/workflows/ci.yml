@@ -61,10 +61,7 @@ jobs:
         uses: ./.github/actions/macos-dependencies
 
       - name: Build the node individually in release mode
-        run: |
-          # Save some space from debug builds
-          rm -rf ./target
-          cargo build --package solochain-template-node --release
+        run: cargo build --package solochain-template-node --release
         timeout-minutes: 90
 
       - name: Make sure the node is producing blocks

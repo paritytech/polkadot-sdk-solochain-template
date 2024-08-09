@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  ci:
+  build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -20,35 +20,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Rust compilation prerequisites (Ubuntu)
-        if: contains(matrix.os, 'ubuntu')
-        run: |
-          sudo apt update
-          sudo apt install -y \
-            protobuf-compiler
-          rustup target add wasm32-unknown-unknown
-          rustup component add rustfmt clippy rust-src
-
-      - name: Install Cargo (MacOS)
-        if: contains(matrix.os, 'macos')
-        run: |
-          curl https://sh.rustup.rs -sSf -y | sh
-          brew install protobuf
-          rustup target add wasm32-unknown-unknown --toolchain stable-aarch64-apple-darwin
-          rustup component add rust-src --toolchain stable-aarch64-apple-darwin
-
-      # We've run into out-of-disk error when compiling Polkadot in the next step, so we free up some space this way.
-      - name: Free Disk Space (Ubuntu)
-        if: contains(matrix.os, 'ubuntu')
-        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # 1.3.1
-        with:
-          android: true # This alone is a 12 GB save.
-          # We disable the rest because it caused some problems. (they're enabled by default)
-          # The Android removal is enough.
-          dotnet: false
-          haskell: false
-          large-packages: false
-          swap-storage: false
+      - if: contains(matrix.os, 'ubuntu')
+        uses: ./.github/actions/free-disk-space
+      - if: contains(matrix.os, 'ubuntu')
+        uses: ./.github/actions/ubuntu-dependencies
+      - if: contains(matrix.os, 'macos')
+        uses: ./.github/actions/macos-dependencies
 
       - name: Build the template
         run: cargo build
@@ -68,30 +45,39 @@ jobs:
         run: SKIP_WASM_BUILD=1 cargo doc --workspace --no-deps
         timeout-minutes: 15
 
-      # This is mentioned as example in the README:
+  run-node:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - if: contains(matrix.os, 'ubuntu')
+        uses: ./.github/actions/free-disk-space
+      - if: contains(matrix.os, 'ubuntu')
+        uses: ./.github/actions/ubuntu-dependencies
+      - if: contains(matrix.os, 'macos')
+        uses: ./.github/actions/macos-dependencies
+
       - name: Build the node individually in release mode
-        run: |
-          # Save some space from debug builds
-          rm -rf ./target
-          cargo build --package solochain-template-node --release
+        run: cargo build --package solochain-template-node --release
         timeout-minutes: 90
+
+      - name: Make sure the node is producing blocks
+        run: |
+          ./target/release/solochain-template-node --dev 2>&1 | tee out.txt &
+          until curl -s '127.0.0.1:9944'; do sleep 5; done
+          until cat out.txt | grep -s "Imported #2"; do sleep 5; done
+        shell: bash
+        timeout-minutes: 5
 
   build-docker:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      # We've run into out-of-disk error when compiling Polkadot in the next step, so we free up some space this way.
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # 1.3.1
-        with:
-          android: true # This alone is a 12 GB save.
-          # We disable the rest because it caused some problems. (they're enabled by default)
-          # The Android removal is enough.
-          dotnet: false
-          haskell: false
-          large-packages: false
-          swap-storage: false
+      - uses: ./.github/actions/free-disk-space
 
       - name: Build the Dockerfile
         run: docker build . -t polkadot-sdk-solochain-template

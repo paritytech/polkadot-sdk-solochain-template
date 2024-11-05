@@ -1,4 +1,3 @@
-License: MIT-0
 
 
 ## Release

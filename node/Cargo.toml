@@ -1,6 +1,6 @@
 [package]
 name = "solochain-template-node"
-description = "A solochain node template built with Substrate, part of Polkadot Sdk. (polkadot v1.15.0)"
+description = "A solochain node template built with Substrate, part of Polkadot Sdk."
 version = "0.1.0"
 license = "Unlicense"
 authors.workspace = true
@@ -49,8 +49,6 @@ sp-consensus-grandpa.workspace = true
 sp-consensus-grandpa.default-features = true
 sc-client-api.workspace = true
 sc-client-api.default-features = true
-sc-rpc-api.workspace = true
-sc-rpc-api.default-features = true
 sc-basic-authorship.workspace = true
 sc-basic-authorship.default-features = true
 sp-runtime.workspace = true
@@ -71,7 +69,10 @@ sp-block-builder.workspace = true
 sp-block-builder.default-features = true
 frame-system.workspace = true
 frame-system.default-features = true
+frame-metadata-hash-extension.workspace = true
+frame-metadata-hash-extension.default-features = true
 pallet-transaction-payment.workspace = true
+pallet-transaction-payment.default-features = true
 pallet-transaction-payment-rpc.workspace = true
 pallet-transaction-payment-rpc.default-features = true
 substrate-frame-rpc-system.workspace = true

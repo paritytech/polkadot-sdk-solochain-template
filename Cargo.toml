@@ -31,7 +31,7 @@ sc-consensus = { version = "0.48.0", default-features = false }
 sc-consensus-aura = { version = "0.49.0", default-features = false }
 sc-consensus-grandpa = { version = "0.34.0", default-features = false }
 sc-executor = { version = "0.42.0", default-features = false }
-sc-network = { version = "0.49.0", default-features = false }
+sc-network = { version = "0.49.1", default-features = false }
 sc-offchain = { version = "44.0.0", default-features = false }
 sc-service = { version = "0.50.0", default-features = false }
 sc-telemetry = { version = "28.1.0", default-features = false }
@@ -44,7 +44,7 @@ sp-consensus-aura = { version = "0.42.0", default-features = false }
 sp-core = { version = "36.1.0", default-features = false }
 sp-genesis-builder = { version = "0.17.0", default-features = false }
 sp-inherents = { version = "36.0.0", default-features = false }
-sp-io = { version = "40.0.0", default-features = false }
+sp-io = { version = "40.0.1", default-features = false }
 sp-keyring = { version = "41.0.0", default-features = false }
 sp-runtime = { version = "41.1.0", default-features = false }
 sp-timestamp = { version = "36.0.0", default-features = false }
@@ -71,4 +71,14 @@ sp-session = { version = "38.1.0", default-features = false }
 sp-storage = { version = "22.0.0", default-features = false }
 sp-transaction-pool = { version = "36.0.0", default-features = false }
 sp-version = { version = "39.0.0", default-features = false }
-substrate-wasm-builder = { version = "26.0.0", default-features = false }
+substrate-wasm-builder = { version = "26.0.1", default-features = false }
+
+[profile.release]
+opt-level = 3
+panic = "unwind"
+
+[profile.production]
+codegen-units = 1
+inherits = "release"
+lto = true
+

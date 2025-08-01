@@ -1,0 +1,38 @@
+[package]
+name = "pallet-create-token"
+version = "0.1.0"
+edition = "2021"
+authors = ["CREATEFI Team"]
+description = "CREATE Token Pallet for CREATEFI Blockchain"
+license = "MIT-0"
+
+[dependencies]
+codec = { package = "parity-scale-codec", version = "3.7.4", default-features = false, features = ["derive"] }
+scale-info = { version = "2.11.6", default-features = false, features = ["derive"] }
+
+frame-support = { version = "40.1.0", default-features = false }
+frame-system = { version = "40.1.0", default-features = false }
+pallet-balances = { version = "41.1.0", default-features = false }
+sp-runtime = { version = "41.1.0", default-features = false }
+sp-core = { version = "36.1.0", default-features = false }
+sp-std = { version = "8.0.0", default-features = false }
+
+[dev-dependencies]
+sp-core = { version = "36.1.0" }
+sp-io = { version = "40.0.1" }
+sp-runtime = { version = "41.1.0" }
+
+[features]
+default = ["std"]
+std = [
+    "codec/std",
+    "scale-info/std",
+    "frame-support/std",
+    "frame-system/std",
+    "pallet-balances/std",
+    "sp-runtime/std",
+    "sp-core/std",
+    "sp-std/std",
+]
+runtime-benchmarks = ["frame-support/runtime-benchmarks"]
+try-runtime = ["frame-support/try-runtime"]

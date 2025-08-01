@@ -28,6 +28,11 @@ pallet-grandpa.workspace = true
 pallet-sudo.workspace = true
 pallet-template.workspace = true
 pallet-timestamp.workspace = true
+pallet-fi-stablecoin.workspace = true
+pallet-fee-engine.workspace = true
+pallet-create-token.workspace = true
+pallet-dex.workspace = true
+pallet-dao.workspace = true
 pallet-transaction-payment-rpc-runtime-api.workspace = true
 pallet-transaction-payment.workspace = true
 scale-info = { features = ["derive", "serde"], workspace = true }
@@ -68,6 +73,11 @@ std = [
 	"pallet-sudo/std",
 	"pallet-template/std",
 	"pallet-timestamp/std",
+	"pallet-fi-stablecoin/std",
+	"pallet-fee-engine/std",
+	"pallet-create-token/std",
+	"pallet-dex/std",
+	"pallet-dao/std",
 	"pallet-transaction-payment-rpc-runtime-api/std",
 	"pallet-transaction-payment/std",
 	"scale-info/std",
@@ -99,6 +109,11 @@ runtime-benchmarks = [
 	"pallet-sudo/runtime-benchmarks",
 	"pallet-template/runtime-benchmarks",
 	"pallet-timestamp/runtime-benchmarks",
+	"pallet-fi-stablecoin/runtime-benchmarks",
+	"pallet-fee-engine/runtime-benchmarks",
+	"pallet-create-token/runtime-benchmarks",
+	"pallet-dex/runtime-benchmarks",
+	"pallet-dao/runtime-benchmarks",
 	"pallet-transaction-payment/runtime-benchmarks",
 	"sp-runtime/runtime-benchmarks",
 ]
@@ -114,6 +129,11 @@ try-runtime = [
 	"pallet-sudo/try-runtime",
 	"pallet-template/try-runtime",
 	"pallet-timestamp/try-runtime",
+	"pallet-fi-stablecoin/try-runtime",
+	"pallet-fee-engine/try-runtime",
+	"pallet-create-token/try-runtime",
+	"pallet-dex/try-runtime",
+	"pallet-dao/try-runtime",
 	"pallet-transaction-payment/try-runtime",
 	"sp-runtime/try-runtime",
 ]

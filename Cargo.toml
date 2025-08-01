@@ -9,6 +9,11 @@ edition = "2021"
 members = [
     "node",
     "pallets/template",
+    "pallets/fi-stablecoin",
+    "pallets/fee-engine",
+    "pallets/create-token",
+    "pallets/dex",
+    "pallets/dao",
     "runtime",
 ]
 resolver = "2"
@@ -16,6 +21,11 @@ resolver = "2"
 [workspace.dependencies]
 solochain-template-runtime = { path = "./runtime", default-features = false }
 pallet-template = { path = "./pallets/template", default-features = false }
+pallet-fi-stablecoin = { path = "./pallets/fi-stablecoin", default-features = false }
+pallet-fee-engine = { path = "./pallets/fee-engine", default-features = false }
+pallet-create-token = { path = "./pallets/create-token", default-features = false }
+pallet-dex = { path = "./pallets/dex", default-features = false }
+pallet-dao = { path = "./pallets/dao", default-features = false }
 clap = { version = "4.5.13" }
 frame-benchmarking-cli = { version = "47.0.0", default-features = false }
 frame-metadata-hash-extension = { version = "0.8.0", default-features = false }

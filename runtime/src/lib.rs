@@ -15,6 +15,19 @@ use sp_runtime::{
 	traits::{BlakeTwo256, IdentifyAccount, Verify},
 	MultiAddress, MultiSignature,
 };
+use frame_support::{
+	traits::{ConstU32, ConstU128, LockIdentifier},
+	parameter_types,
+};
+
+// Define account IDs and lock identifiers using parameter_types
+parameter_types! {
+	pub const FounderAccount: AccountId = AccountId::new([0u8; 32]);
+	pub const DaoTreasuryAccount: AccountId = AccountId::new([1u8; 32]);
+	pub const StakingLockId: LockIdentifier = [1u8; 8];
+	pub const CreateTokenGovernanceLockId: LockIdentifier = [2u8; 8];
+	pub const DaoGovernanceLockId: LockIdentifier = [3u8; 8];
+}
 #[cfg(feature = "std")]
 use sp_version::NativeVersion;
 use sp_version::RuntimeVersion;
@@ -22,6 +35,11 @@ use sp_version::RuntimeVersion;
 pub use frame_system::Call as SystemCall;
 pub use pallet_balances::Call as BalancesCall;
 pub use pallet_timestamp::Call as TimestampCall;
+pub use pallet_fi_stablecoin::Call as FiStablecoinCall;
+pub use pallet_fee_engine::Call as FeeEngineCall;
+pub use pallet_create_token::Call as CreateTokenCall;
+pub use pallet_dex::Call as DexCall;
+pub use pallet_dao::Call as DaoCall;
 #[cfg(any(feature = "std", test))]
 pub use sp_runtime::BuildStorage;
 
@@ -225,4 +243,71 @@ mod runtime {
 	// Include the custom logic from the pallet-template in the runtime.
 	#[runtime::pallet_index(7)]
 	pub type Template = pallet_template;
+
+	// Include the CREATEFI pallets in the runtime.
+	#[runtime::pallet_index(8)]
+	pub type FiStablecoin = pallet_fi_stablecoin;
+
+	#[runtime::pallet_index(9)]
+	pub type FeeEngine = pallet_fee_engine;
+
+	#[runtime::pallet_index(10)]
+	pub type CreateToken = pallet_create_token;
+
+	#[runtime::pallet_index(11)]
+	pub type Dex = pallet_dex;
+
+	#[runtime::pallet_index(12)]
+	pub type Dao = pallet_dao;
+}
+
+// Configure the pallets
+impl pallet_fi_stablecoin::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type Currency = Balances;
+	type WeightInfo = pallet_fi_stablecoin::weights::SubstrateWeight<Runtime>;
+	type MinCollateralAmount = ConstU128<1_000_000_000_000>; // 1 FI
+	type MaxMintAmount = ConstU128<1_000_000_000_000_000_000_000>; // 1M FI
+}
+
+impl pallet_fee_engine::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type Currency = Balances;
+	type WeightInfo = pallet_fee_engine::weights::SubstrateWeight<Runtime>;
+	type FounderAccount = FounderAccount;
+	type DaoTreasuryAccount = DaoTreasuryAccount;
+}
+
+impl pallet_create_token::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type Currency = Balances;
+	type WeightInfo = pallet_create_token::weights::SubstrateWeight<Runtime>;
+	type MaxWalletPercentage = ConstU32<5>; // 5% max per wallet
+	type MinGovernanceStake = ConstU128<1_000_000_000_000_000_000_000>; // 1 CREATE
+	type StakingLockId = StakingLockId;
+	type GovernanceLockId = CreateTokenGovernanceLockId;
+}
+
+impl pallet_dex::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type Currency = Balances;
+	type WeightInfo = pallet_dex::weights::SubstrateWeight<Runtime>;
+	type TradingFeeBps = ConstU32<30>; // 0.3%
+	type LpFeeBps = ConstU32<25>; // 0.25%
+	type MinLiquidity = ConstU128<1_000_000_000_000_000_000_000>; // 1 token
+	type MaxSlippageBps = ConstU32<500>; // 5%
+}
+
+impl pallet_dao::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type Currency = Balances;
+	type WeightInfo = pallet_dao::weights::SubstrateWeight<Runtime>;
+	type MinProposalDeposit = ConstU128<1_000_000_000_000_000_000_000>; // 1 CREATE
+	type MaxProposalDescription = ConstU32<1024>;
+	type VotingPeriod = ConstU32<100>; // 100 blocks
+	type ExecutionDelay = ConstU32<10>; // 10 blocks
+	type MinVotes = ConstU32<1>;
+	type MaxActiveProposals = ConstU32<10>;
+	type TreasuryAccount = DaoTreasuryAccount;
+	type GovernanceLockId = DaoGovernanceLockId;
 }

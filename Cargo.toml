@@ -13,65 +13,104 @@ members = [
 ]
 resolver = "2"
 
+
+[workspace.lints.rust]
+suspicious_double_ref_op = { level = "allow", priority = 2 }
+# `substrate_runtime` is a common `cfg` condition name used in the repo.
+unexpected_cfgs = { level = "warn", check-cfg = [
+	'cfg(build_opt_level, values("3"))',
+	'cfg(build_profile, values("debug", "release"))',
+	'cfg(enable_alloc_error_handler)',
+	'cfg(fuzzing)',
+	'cfg(ignore_flaky_test)',
+	'cfg(substrate_runtime)',
+] }
+
+[workspace.lints.clippy]
+all = { level = "allow", priority = 0 }
+bind_instead_of_map = { level = "allow", priority = 2 }              # stylistic
+borrowed-box = { level = "allow", priority = 2 }                     # Reasonable to fix this one
+complexity = { level = "warn", priority = 1 }
+correctness = { level = "warn", priority = 1 }
+default_constructed_unit_structs = { level = "allow", priority = 2 } # stylistic
+derivable_impls = { level = "allow", priority = 2 }                  # false positives
+eq_op = { level = "allow", priority = 2 }                            # In tests we test equality.
+erasing_op = { level = "allow", priority = 2 }                       # E.g. 0 * DOLLARS
+extra-unused-type-parameters = { level = "allow", priority = 2 }     # stylistic
+identity-op = { level = "allow", priority = 2 }                      # One case where we do 0 +
+if-same-then-else = { level = "allow", priority = 2 }
+needless-lifetimes = { level = "allow", priority = 2 }               # generated code
+needless_option_as_deref = { level = "allow", priority = 2 }         # false positives
+nonminimal-bool = { level = "allow", priority = 2 }                  # maybe
+option-map-unit-fn = { level = "allow", priority = 2 }               # stylistic
+stable_sort_primitive = { level = "allow", priority = 2 }            # prefer stable sort
+too-many-arguments = { level = "allow", priority = 2 }               # (Turning this on would lead to)
+type_complexity = { level = "allow", priority = 2 }                  # raison d'etre
+unit_arg = { level = "allow", priority = 2 }                         # stylistic
+unnecessary_cast = { level = "allow", priority = 2 }                 # Types may change
+useless_conversion = { level = "allow", priority = 2 }               # Types may change
+while_immutable_condition = { level = "allow", priority = 2 }        # false positives
+zero-prefixed-literal = { level = "allow", priority = 2 }            # 00_1000_000
+
 [workspace.dependencies]
 solochain-template-runtime = { path = "./runtime", default-features = false }
 pallet-template = { path = "./pallets/template", default-features = false }
 clap = { version = "4.5.13" }
-frame-benchmarking-cli = { version = "47.0.0", default-features = false }
-frame-metadata-hash-extension = { version = "0.8.0", default-features = false }
-frame-system = { version = "40.1.0", default-features = false }
+frame-benchmarking-cli = { version = "53.0.0", default-features = false }
+frame-metadata-hash-extension = { version = "0.13.0", default-features = false }
+frame-system = { version = "45.0.0", default-features = false }
 futures = { version = "0.3.31" }
-jsonrpsee = { version = "0.24.3" }
-pallet-transaction-payment = { version = "40.0.0", default-features = false }
-pallet-transaction-payment-rpc = { version = "43.0.0", default-features = false }
-sc-basic-authorship = { version = "0.49.0", default-features = false }
-sc-cli = { version = "0.51.0", default-features = false }
-sc-client-api = { version = "39.0.0", default-features = false }
-sc-consensus = { version = "0.48.0", default-features = false }
-sc-consensus-aura = { version = "0.49.0", default-features = false }
-sc-consensus-grandpa = { version = "0.34.0", default-features = false }
-sc-executor = { version = "0.42.0", default-features = false }
-sc-network = { version = "0.49.1", default-features = false }
-sc-offchain = { version = "44.0.0", default-features = false }
-sc-service = { version = "0.50.0", default-features = false }
-sc-telemetry = { version = "28.1.0", default-features = false }
-sc-transaction-pool = { version = "39.0.0", default-features = false }
-sc-transaction-pool-api = { version = "39.0.0", default-features = false }
-sp-api = { version = "36.0.1", default-features = false }
-sp-block-builder = { version = "36.0.0", default-features = false }
-sp-blockchain = { version = "39.0.0", default-features = false }
-sp-consensus-aura = { version = "0.42.0", default-features = false }
-sp-core = { version = "36.1.0", default-features = false }
-sp-genesis-builder = { version = "0.17.0", default-features = false }
-sp-inherents = { version = "36.0.0", default-features = false }
-sp-io = { version = "40.0.1", default-features = false }
-sp-keyring = { version = "41.0.0", default-features = false }
-sp-runtime = { version = "41.1.0", default-features = false }
-sp-timestamp = { version = "36.0.0", default-features = false }
-substrate-frame-rpc-system = { version = "43.0.0", default-features = false }
+jsonrpsee = { version = "0.24.10" }
+pallet-transaction-payment = { version = "45.0.0", default-features = false }
+pallet-transaction-payment-rpc = { version = "48.0.0", default-features = false }
+sc-basic-authorship = { version = "0.53.0", default-features = false }
+sc-cli = { version = "0.57.0", default-features = false }
+sc-client-api = { version = "44.0.0", default-features = false }
+sc-consensus = { version = "0.54.0", default-features = false }
+sc-consensus-aura = { version = "0.55.0", default-features = false }
+sc-consensus-grandpa = { version = "0.40.0", default-features = false }
+sc-executor = { version = "0.47.0", default-features = false }
+sc-network = { version = "0.55.1", default-features = false }
+sc-offchain = { version = "50.0.0", default-features = false }
+sc-service = { version = "0.56.0", default-features = false }
+sc-telemetry = { version = "30.0.0", default-features = false }
+sc-transaction-pool = { version = "44.1.0", default-features = false }
+sc-transaction-pool-api = { version = "43.0.0", default-features = false }
+sp-api = { version = "40.0.0", default-features = false }
+sp-block-builder = { version = "40.0.0", default-features = false }
+sp-blockchain = { version = "43.0.0", default-features = false }
+sp-consensus-aura = { version = "0.46.0", default-features = false }
+sp-core = { version = "39.0.0", default-features = false }
+sp-genesis-builder = { version = "0.21.0", default-features = false }
+sp-inherents = { version = "40.0.0", default-features = false }
+sp-io = { version = "44.0.0", default-features = false }
+sp-keyring = { version = "45.0.0", default-features = false }
+sp-runtime = { version = "45.0.0", default-features = false }
+sp-timestamp = { version = "40.0.0", default-features = false }
+substrate-frame-rpc-system = { version = "49.0.0", default-features = false }
 substrate-build-script-utils = { version = "11.0.0", default-features = false }
-codec = { version = "3.7.4", default-features = false, package = "parity-scale-codec" }
-frame-benchmarking = { version = "40.0.0", default-features = false }
-frame-executive = { version = "40.0.0", default-features = false }
-frame-support = { version = "40.1.0", default-features = false }
-frame-system-benchmarking = { version = "40.0.0", default-features = false }
-frame-system-rpc-runtime-api = { version = "36.0.0", default-features = false }
-frame-try-runtime = { version = "0.46.0", default-features = false }
-pallet-aura = { version = "39.0.0", default-features = false }
-pallet-balances = { version = "41.1.0", default-features = false }
-pallet-grandpa = { version = "40.0.0", default-features = false }
-pallet-sudo = { version = "40.0.0", default-features = false }
-pallet-timestamp = { version = "39.0.0", default-features = false }
-pallet-transaction-payment-rpc-runtime-api = { version = "40.0.0", default-features = false }
+codec = { version = "3.7.5", default-features = false, package = "parity-scale-codec" }
+frame-benchmarking = { version = "45.0.1", default-features = false }
+frame-executive = { version = "45.0.1", default-features = false }
+frame-support = { version = "45.1.0", default-features = false }
+frame-system-benchmarking = { version = "45.0.0", default-features = false }
+frame-system-rpc-runtime-api = { version = "40.0.0", default-features = false }
+frame-try-runtime = { version = "0.51.0", default-features = false }
+pallet-aura = { version = "44.0.0", default-features = false }
+pallet-balances = { version = "46.0.0", default-features = false }
+pallet-grandpa = { version = "45.0.0", default-features = false }
+pallet-sudo = { version = "45.0.0", default-features = false }
+pallet-timestamp = { version = "44.0.0", default-features = false }
+pallet-transaction-payment-rpc-runtime-api = { version = "45.0.0", default-features = false }
 scale-info = { version = "2.11.6", default-features = false }
 serde_json = { version = "1.0.132", default-features = false }
-sp-consensus-grandpa = { version = "23.1.0", default-features = false }
-sp-offchain = { version = "36.0.0", default-features = false }
-sp-session = { version = "38.1.0", default-features = false }
+sp-consensus-grandpa = { version = "27.0.0", default-features = false }
+sp-offchain = { version = "40.0.0", default-features = false }
+sp-session = { version = "42.0.0", default-features = false }
 sp-storage = { version = "22.0.0", default-features = false }
-sp-transaction-pool = { version = "36.0.0", default-features = false }
-sp-version = { version = "39.0.0", default-features = false }
-substrate-wasm-builder = { version = "26.0.1", default-features = false }
+sp-transaction-pool = { version = "40.0.0", default-features = false }
+sp-version = { version = "43.0.0", default-features = false }
+substrate-wasm-builder = { version = "31.1.0", default-features = false }
 
 [profile.release]
 opt-level = 3

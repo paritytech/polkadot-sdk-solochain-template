@@ -24,6 +24,7 @@
 // For more information, please refer to <http://unlicense.org>
 
 // Substrate and Polkadot dependencies
+use frame_system::EnsureRoot;
 use frame_support::{
 	derive_impl, parameter_types,
 	traits::{ConstBool, ConstU128, ConstU32, ConstU64, ConstU8, VariantCountOf},
@@ -161,4 +162,18 @@ impl pallet_sudo::Config for Runtime {
 impl pallet_template::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
 	type WeightInfo = pallet_template::weights::SubstrateWeight<Runtime>;
+}
+parameter_types! {
+    pub const MaxCandidates: u32= 20;
+    pub const MaxNameLength: u64 = 256;
+	pub const MaxCandidatesNameLen: u32= 64;
+}
+
+impl pallet_voting::Config for Runtime {
+    type RuntimeEvent = RuntimeEvent;
+    type MaxEncryptedVoteSize = ConstU32<2048>;
+    type MaxBlindSignatureSize = ConstU32<512>;
+	type MaxCandidates=MaxCandidates;
+	type AdminOrigin=EnsureRoot<AccountId>;
+	type MaxCandidateNameLen=ConstU32<20>;
 }

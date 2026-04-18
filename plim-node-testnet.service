@@ -1,0 +1,21 @@
+[Unit]
+Description=Plim Chain Node - Testnet
+After=network.target
+
+[Service]
+Type=simple
+User=plimadmin
+ExecStart=/mnt/data/cargo-target/release/plim-node \
+  --chain local \
+  --name "Plim-Testnet-1" \
+  --rpc-cors=all \
+  --rpc-port=9944 \
+  --prometheus-external \
+  --base-path /mnt/data/plim-chain-testnet \
+  --validator
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target

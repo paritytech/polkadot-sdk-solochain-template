@@ -1,6 +1,7 @@
 use sc_cli::RunCmd;
 
 #[derive(Debug, clap::Parser)]
+#[command(author, about = "Plim Protocol Node")]
 pub struct Cli {
 	#[command(subcommand)]
 	pub subcommand: Option<Subcommand>,

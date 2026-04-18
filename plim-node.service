@@ -1,0 +1,23 @@
+[Unit]
+Description=Plim Protocol Node
+After=network.target
+
+[Service]
+User=plimchain
+ExecStart=/usr/local/bin/plim-node \
+  --chain /etc/plim/plim-spec-raw.json \
+  --name "Plim-Validator-1" \
+  --validator \
+  --rpc-cors all \
+  --rpc-methods Safe \
+  --prometheus-external \
+  --base-path /data/plim-chain
+Restart=always
+RestartSec=10
+LimitNOFILE=65535
+ProtectSystem=strict
+NoNewPrivileges=true
+ReadWritePaths=/data/plim-chain
+
+[Install]
+WantedBy=multi-user.target

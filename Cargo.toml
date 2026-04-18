@@ -1,21 +1,37 @@
 [workspace.package]
 license = "MIT-0"
-authors = ["Parity Technologies <admin@parity.io>"]
-homepage = "https://paritytech.github.io/polkadot-sdk/"
-repository = "https://github.com/paritytech/polkadot-sdk-solochain-template.git"
+authors = ["pLimLab <dev@plimlab.ch>"]
+homepage = "https://plimlab.ch"
+repository = "https://github.com/plimlab/plim-protocol.git"
 edition = "2021"
 
 [workspace]
 members = [
     "node",
     "pallets/template",
+    "pallets/plim-identity",
+    "pallets/plim-payments",
+    "pallets/plim-mandates",
+    "pallets/plim-channels",
+    "pallets/plim-delegation",
+    "pallets/plim-compliance",
+    "pallets/plim-reputation",
+    "pallets/plim-timestamps",
     "runtime",
 ]
 resolver = "2"
 
 [workspace.dependencies]
-solochain-template-runtime = { path = "./runtime", default-features = false }
+plim-runtime = { path = "./runtime", default-features = false }
 pallet-template = { path = "./pallets/template", default-features = false }
+pallet-plim-identity = { path = "./pallets/plim-identity", default-features = false }
+pallet-plim-payments = { path = "./pallets/plim-payments", default-features = false }
+pallet-plim-mandates = { path = "./pallets/plim-mandates", default-features = false }
+pallet-plim-channels = { path = "./pallets/plim-channels", default-features = false }
+pallet-plim-delegation = { path = "./pallets/plim-delegation", default-features = false }
+pallet-plim-compliance = { path = "./pallets/plim-compliance", default-features = false }
+pallet-plim-reputation = { path = "./pallets/plim-reputation", default-features = false }
+pallet-plim-timestamps = { path = "./pallets/plim-timestamps", default-features = false }
 clap = { version = "4.5.13" }
 frame-benchmarking-cli = { version = "47.0.0", default-features = false }
 frame-metadata-hash-extension = { version = "0.8.0", default-features = false }
@@ -51,6 +67,7 @@ sp-timestamp = { version = "36.0.0", default-features = false }
 substrate-frame-rpc-system = { version = "43.0.0", default-features = false }
 substrate-build-script-utils = { version = "11.0.0", default-features = false }
 codec = { version = "3.7.4", default-features = false, package = "parity-scale-codec" }
+hex-literal = { version = "0.4.1" }
 frame-benchmarking = { version = "40.0.0", default-features = false }
 frame-executive = { version = "40.0.0", default-features = false }
 frame-support = { version = "40.1.0", default-features = false }
@@ -58,9 +75,11 @@ frame-system-benchmarking = { version = "40.0.0", default-features = false }
 frame-system-rpc-runtime-api = { version = "36.0.0", default-features = false }
 frame-try-runtime = { version = "0.46.0", default-features = false }
 pallet-aura = { version = "39.0.0", default-features = false }
+pallet-assets = { version = "42.0.0", default-features = false }
 pallet-balances = { version = "41.1.0", default-features = false }
 pallet-grandpa = { version = "40.0.0", default-features = false }
 pallet-sudo = { version = "40.0.0", default-features = false }
+pallet-multisig = { version = "40.1.0", default-features = false }
 pallet-timestamp = { version = "39.0.0", default-features = false }
 pallet-transaction-payment-rpc-runtime-api = { version = "40.0.0", default-features = false }
 scale-info = { version = "2.11.6", default-features = false }

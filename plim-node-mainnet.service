@@ -1,0 +1,22 @@
+[Unit]
+Description=Plim Chain Node - Mainnet
+After=network.target
+
+[Service]
+Type=simple
+User=plimadmin
+ExecStart=/mnt/data/cargo-target/release/plim-node \
+  --chain /opt/plimlab/plim-protocol/plim-chain/chain-spec-mainnet-raw.json \
+  --name "Plim-Mainnet-1" \
+  --rpc-cors=all \
+  --rpc-port=9944 \
+  --rpc-methods Safe \
+  --prometheus-external \
+  --base-path /mnt/data/plim-chain-mainnet \
+  --validator
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target

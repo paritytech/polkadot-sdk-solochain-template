@@ -1,6 +1,6 @@
 [package]
-name = "solochain-template-runtime"
-description = "A solochain runtime template built with Substrate, part of Polkadot Sdk."
+name = "plim-runtime"
+description = "P:L:I:M:/Protocol runtime — Substrate L1 for AI agent payments."
 version = "0.1.0"
 license = "Unlicense"
 authors.workspace = true
@@ -23,11 +23,20 @@ frame-system-rpc-runtime-api.workspace = true
 frame-system.workspace = true
 frame-try-runtime = { optional = true, workspace = true }
 pallet-aura.workspace = true
+pallet-assets = { workspace = true, default-features = false }
 pallet-balances.workspace = true
 pallet-grandpa.workspace = true
 pallet-sudo.workspace = true
-pallet-template.workspace = true
+pallet-multisig.workspace = true
 pallet-timestamp.workspace = true
+pallet-plim-identity.workspace = true
+pallet-plim-payments.workspace = true
+pallet-plim-mandates.workspace = true
+pallet-plim-channels.workspace = true
+pallet-plim-delegation.workspace = true
+pallet-plim-compliance.workspace = true
+pallet-plim-reputation.workspace = true
+pallet-plim-timestamps.workspace = true
 pallet-transaction-payment-rpc-runtime-api.workspace = true
 pallet-transaction-payment.workspace = true
 scale-info = { features = ["derive", "serde"], workspace = true }
@@ -46,6 +55,7 @@ sp-session.workspace = true
 sp-storage.workspace = true
 sp-transaction-pool.workspace = true
 sp-version = { features = ["serde"], workspace = true }
+hex-literal = { workspace = true }
 
 [build-dependencies]
 substrate-wasm-builder = { optional = true, workspace = true, default-features = true }
@@ -63,11 +73,20 @@ std = [
 	"frame-system/std",
 	"frame-try-runtime?/std",
 	"pallet-aura/std",
+	"pallet-assets/std",
 	"pallet-balances/std",
 	"pallet-grandpa/std",
 	"pallet-sudo/std",
-	"pallet-template/std",
+	"pallet-multisig/std",
 	"pallet-timestamp/std",
+	"pallet-plim-identity/std",
+	"pallet-plim-payments/std",
+	"pallet-plim-mandates/std",
+	"pallet-plim-channels/std",
+	"pallet-plim-delegation/std",
+	"pallet-plim-compliance/std",
+	"pallet-plim-reputation/std",
+	"pallet-plim-timestamps/std",
 	"pallet-transaction-payment-rpc-runtime-api/std",
 	"pallet-transaction-payment/std",
 	"scale-info/std",
@@ -94,11 +113,20 @@ runtime-benchmarks = [
 	"frame-support/runtime-benchmarks",
 	"frame-system-benchmarking/runtime-benchmarks",
 	"frame-system/runtime-benchmarks",
+	"pallet-assets/runtime-benchmarks",
 	"pallet-balances/runtime-benchmarks",
 	"pallet-grandpa/runtime-benchmarks",
 	"pallet-sudo/runtime-benchmarks",
-	"pallet-template/runtime-benchmarks",
+	"pallet-multisig/runtime-benchmarks",
 	"pallet-timestamp/runtime-benchmarks",
+	"pallet-plim-identity/runtime-benchmarks",
+	"pallet-plim-payments/runtime-benchmarks",
+	"pallet-plim-mandates/runtime-benchmarks",
+	"pallet-plim-channels/runtime-benchmarks",
+	"pallet-plim-delegation/runtime-benchmarks",
+	"pallet-plim-compliance/runtime-benchmarks",
+	"pallet-plim-reputation/runtime-benchmarks",
+	"pallet-plim-timestamps/runtime-benchmarks",
 	"pallet-transaction-payment/runtime-benchmarks",
 	"sp-runtime/runtime-benchmarks",
 ]
@@ -109,11 +137,20 @@ try-runtime = [
 	"frame-system/try-runtime",
 	"frame-try-runtime/try-runtime",
 	"pallet-aura/try-runtime",
+	"pallet-assets/try-runtime",
 	"pallet-balances/try-runtime",
 	"pallet-grandpa/try-runtime",
 	"pallet-sudo/try-runtime",
-	"pallet-template/try-runtime",
+	"pallet-multisig/try-runtime",
 	"pallet-timestamp/try-runtime",
+	"pallet-plim-identity/try-runtime",
+	"pallet-plim-payments/try-runtime",
+	"pallet-plim-mandates/try-runtime",
+	"pallet-plim-channels/try-runtime",
+	"pallet-plim-delegation/try-runtime",
+	"pallet-plim-compliance/try-runtime",
+	"pallet-plim-reputation/try-runtime",
+	"pallet-plim-timestamps/try-runtime",
 	"pallet-transaction-payment/try-runtime",
 	"sp-runtime/try-runtime",
 ]

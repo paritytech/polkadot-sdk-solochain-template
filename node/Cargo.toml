@@ -63,6 +63,10 @@ frame-benchmarking-cli = { workspace = true, default-features = true }
 # Local Dependencies
 solochain-template-runtime = { workspace = true }
 
+# Temporary: forwards `try-runtime` to `pallet-staking`, which `frame-benchmarking-cli` pulls in.
+# The next template sync removes this.
+pallet-staking = { version = "51.0.0", default-features = false, optional = true }
+
 [build-dependencies]
 substrate-build-script-utils = { workspace = true, default-features = true }
 
@@ -81,7 +85,9 @@ runtime-benchmarks = [
 # Enable features that allow the runtime to be tried and debugged. Name might be subject to change
 # in the near future.
 try-runtime = [
+	"dep:pallet-staking",
 	"frame-system/try-runtime",
+	"pallet-staking/try-runtime",
 	"pallet-transaction-payment/try-runtime",
 	"solochain-template-runtime/try-runtime",
 	"sp-runtime/try-runtime",

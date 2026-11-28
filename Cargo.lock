@@ -11343,6 +11343,7 @@ dependencies = [
  "frame-system",
  "futures",
  "jsonrpsee 0.24.11",
+ "pallet-staking",
  "pallet-transaction-payment",
  "pallet-transaction-payment-rpc",
  "sc-basic-authorship",
